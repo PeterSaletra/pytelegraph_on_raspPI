@@ -32,8 +32,6 @@ def endtime():
     gstart = time.time()
 
 def setup():
-    a = 'A'
-    lcd.write_string(a)
     lcd.clear()
     lcd.write_string('Welcom to Morse Code')
     time.sleep(3)
