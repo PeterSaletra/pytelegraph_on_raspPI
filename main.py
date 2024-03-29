@@ -59,7 +59,7 @@ def reset():
         client.sendWord(word)
     else:
         with open("messages.txt", "+a") as file:
-            file.write(word)
+            file.write(word + "\n")
 
     lcd.clear()
     blink()
