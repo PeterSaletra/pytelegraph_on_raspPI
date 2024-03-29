@@ -1,23 +1,35 @@
 class Node:
-    def __init__(self, letter, left=None, right=None):
+    def __init__(self, letter: str, left=None, right=None):
         self.letter = letter
         self.left = left
         self.right = right
 
 
-def findLetter(node, code, i):
+def findLetter(node: Node, code: str, i: int) -> str:
+    '''
+    Finds letter in binary tree based on morse code entered by user.
+
+    :param Node node: Head of binary tree
+    :param str code: Morse code entered by user
+    :param int i: should by 0, it is the counter of length of code
+    :return str: Returns correct letter or empty string if letter was not found
+    '''
     if not node:
-        return False
+        return ""
     elif i == len(code):
-        l = node.letter
-        return l
+        return node.letter
     elif code[i] == '.':
         return findLetter(node.left, code, i+1)
     elif code[i] == '-':
         return findLetter(node.right, code, i+1)
 
 
-def makeMorseTree():
+def makeMorseTree() -> Node:
+    '''
+    Makes whole binary tree for easier translation.
+
+    :retrun Node: Head of the binary tree
+    '''
     tree = Node("Start")
     tree.left = Node('E')
     tree.right = Node('T')

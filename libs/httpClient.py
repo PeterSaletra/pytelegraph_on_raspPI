@@ -1,24 +1,35 @@
 import requests
-from http import HTTPStstus
+from http import HTTPStatus
 
 class HTTPClient:
-    def __init__(self, ip_address, port):
+    def __init__(self, ip_address: str, port: int):
         self.ip_address = ip_address
         self.port = port
-        self.url = "http://" + str(self.ip_address) + ":" + str(port)
+        self.url = "http://" + self.ip_address + ":" + str(port)
 
-    def checkConnection():
-        r =  request.get(url = self.url)
+    def checkConnection(self) -> bool:
+        '''
+        Checks connection to HTTP Server.
+
+        :return bool: If connection is OK returns True else returns False
+        '''
+        r = requests.get(url = self.url)
         if HTTPStatus.OK == r.status_code:
             return True
 
-        return Fasle
+        return False
 
-    def sendWord(word):
+    def sendWord(self, word: str) -> bool:
+        '''
+        Send word over request into server with word transleted from morse code.
+        :param str word: Tranlated word from morse code
+        :return bool: If request was corretly handles by server returns True else Return False
+        '''
+
         params = {"word": word}
-        r = request.post(url=self.url, data=paramms)
+        r = requests.post(url=self.url, data=params)
         if HTTPStatus.CREATED == r.status_code:
-            print("Wiadomość poprawieni dostarczona")
+            print("Message was send correctly")
             return True
-        print("Nie dostarczono wiadomości")
-        retrun False
+        print("Error occurred")
+        return False

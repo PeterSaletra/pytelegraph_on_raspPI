@@ -21,6 +21,9 @@ class HTTPRequestHandler(BaseHTTPRequestHandler):
     
 
 def main():
+    '''
+    Setsup Server.
+    '''
     server_address = ('192.170.1.133', 8000)
     httpd = HTTPServer(server_address, HTTPRequestHandler)
     print("Server working correctly")
