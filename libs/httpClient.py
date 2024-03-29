@@ -1,11 +1,13 @@
-import requests
+import sys
+import json
+import http.client
 from http import HTTPStatus
 
 class HTTPClient:
     def __init__(self, ip_address: str, port: int):
         self.ip_address = ip_address
         self.port = port
-        self.url = "http://" + self.ip_address + ":" + str(port)
+        self.conn = http.client.HTTPConnection(self.ip_address, self.port)
 
     def checkConnection(self) -> bool:
         '''
@@ -13,9 +15,13 @@ class HTTPClient:
 
         :return bool: If connection is OK returns True else returns False
         '''
-        r = requests.get(url = self.url)
-        if HTTPStatus.OK == r.status_code:
-            return True
+        try:
+            self.conn.request("GET", "/")
+            r = self.conn.getresponse()
+            if HTTPStatus.OK == r.status:
+                return True
+        except Exception as e:
+            print("Error occured:" + str(e))
 
         return False
 
@@ -25,11 +31,14 @@ class HTTPClient:
         :param str word: Tranlated word from morse code
         :return bool: If request was corretly handles by server returns True else Return False
         '''
+        try:
+            params = json.dumps({"word": word})
+            self.conn.request("POST", "/", body=params, headers={"Content-Type": "application/json"})
+            r = self.conn.getresponse()
+            if HTTPStatus.CREATED == r.status:
+                print("Message was send correctly")
+                return True
+        except Exception as e:
+            print("Error occurred:" + str(e))
 
-        params = {"word": word}
-        r = requests.post(url=self.url, data=params)
-        if HTTPStatus.CREATED == r.status_code:
-            print("Message was send correctly")
-            return True
-        print("Error occurred")
         return False

@@ -8,7 +8,7 @@ lcd = CharLCD(i2c_expander='PCF8574', address=0x27, port=1, cols=16, rows=2, dot
 button = Button(5)
 led = LED(6)
 
-client  = HTTPClient("127.0.0.1", 8000)
+client  = HTTPClient("localhost", 8000)
 word = ''
 code =  ''
 start =  0
