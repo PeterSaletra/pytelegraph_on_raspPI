@@ -8,7 +8,7 @@
 * [Setup](#setup)
 
 ## General info
-It is telegraph project on Raspberry Pi
+It is telegraph project on Raspberry Pi. It university assigment for Microcontrollers and Microprocessors
 
 ## Electronic Circiut Design
 
