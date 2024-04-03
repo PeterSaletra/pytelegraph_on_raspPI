@@ -81,7 +81,7 @@ def printLetter(letter: str, posy: int, posx: int):
     lcd.cursor_pos = (posy, posx)
     lcd.write_string(letter)
     word += letter
-    print(f"Actuall code: {letter}")
+    print(f"Actuall letter: {letter}")
 
 
 def wrongMorseCode():
